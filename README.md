@@ -6,13 +6,18 @@ A beginner-friendly property listing project built with PHP, MySQL, HTML, and CS
 
 1. Start **Apache** and **MySQL** in the XAMPP Manager.
 2. Open `http://localhost/phpmyadmin` and import `database.sql`.
-3. Make this project available in XAMPP's `htdocs` folder. If you cloned it into `~/Documents/phpcapstone`, you can run this once in Terminal:
+3. Copy the project into XAMPP's `htdocs` folder. Apache may not be able to follow a symbolic link into your private `Documents` folder, so copy the files instead. If you cloned it into `~/Documents/phpcapstone`, run this in Terminal:
 
    ```sh
-   ln -s "$HOME/Documents/phpcapstone" /Applications/XAMPP/xamppfiles/htdocs/phpcapstone1
+   if [ -L /Applications/XAMPP/xamppfiles/htdocs/phpcapstone1 ]; then
+     rm /Applications/XAMPP/xamppfiles/htdocs/phpcapstone1
+   fi
+   mkdir -p /Applications/XAMPP/xamppfiles/htdocs/phpcapstone1
+   rsync -a --exclude='.git/' "$HOME/Documents/phpcapstone/" /Applications/XAMPP/xamppfiles/htdocs/phpcapstone1/
+   chmod 777 /Applications/XAMPP/xamppfiles/htdocs/phpcapstone1/uploads
    ```
 
-   If `htdocs/phpcapstone1` already exists, remove or rename that folder first.
+   Run the `rsync` command again after changing the project files so the XAMPP copy is updated. The `chmod` line lets XAMPP save uploaded photos during local development.
 4. Visit `http://localhost/phpcapstone1`.
 
 The default database settings in `includes/db.php` match this computer's XAMPP setup: host `127.0.0.1`, port `3307`, user `root`, and an empty password. If your settings are different, set the `DB_HOST`, `DB_PORT`, `DB_NAME`, `DB_USER`, or `DB_PASSWORD` environment values before starting Apache. The upload limit is 2 MB to match the XAMPP PHP setting.
