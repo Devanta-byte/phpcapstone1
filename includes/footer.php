@@ -2,6 +2,6 @@
 <footer class="site-footer">
     <p>Home Haven · A student property listing demo. Purchases are simulated.</p>
 </footer>
-<script src="assets/script.js"></script>
+<script src="assets/script.js?v=2"></script>
 </body>
 </html>
