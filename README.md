@@ -14,7 +14,7 @@ A beginner-friendly property listing project built with PHP, MySQL, HTML, and CS
    fi
    mkdir -p /Applications/XAMPP/xamppfiles/htdocs/phpcapstone1
    rsync -a --exclude='.git/' "$HOME/Documents/phpcapstone/" /Applications/XAMPP/xamppfiles/htdocs/phpcapstone1/
-   chmod 777 /Applications/XAMPP/xamppfiles/htdocs/phpcapstone1/uploads
+   chmod 733 /Applications/XAMPP/xamppfiles/htdocs/phpcapstone1/uploads
    ```
 
    Run the `rsync` command again after changing the project files so the XAMPP copy is updated. The `chmod` line lets XAMPP save uploaded photos during local development.
