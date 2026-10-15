@@ -57,7 +57,7 @@ require 'includes/header.php';
                 <?php endif; ?>
             <?php else: ?>
                 <p class="message message-info">
-                    <?php if (!empty($property['buyer_name'])): ?>
+                    <?php if (!empty($property['buyer_name']) && isset($_SESSION['user_id']) && (int) $_SESSION['user_id'] === (int) $property['seller_id']): ?>
                         This property has been sold to <strong><?php echo escapeHtml($property['buyer_name']); ?></strong>.
                     <?php else: ?>
                         This property has already been marked as sold.
