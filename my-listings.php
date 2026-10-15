@@ -4,7 +4,7 @@ require_once 'includes/functions.php';
 requireLogin();
 
 $userId = (int) $_SESSION['user_id'];
-$statement = $conn->prepare('SELECT * FROM properties WHERE seller_id = ? ORDER BY created_at DESC');
+$statement = $conn->prepare('SELECT properties.*, buyers.name AS buyer_name FROM properties LEFT JOIN users AS buyers ON properties.buyer_id = buyers.id WHERE properties.seller_id = ? ORDER BY properties.created_at DESC');
 $statement->bind_param('i', $userId);
 $statement->execute();
 $properties = $statement->get_result();
@@ -34,6 +34,9 @@ require 'includes/header.php';
                         <p class="property-location"><?php echo escapeHtml($property['location']); ?></p>
                         <h2><a href="property.php?id=<?php echo (int) $property['id']; ?>"><?php echo escapeHtml($property['title']); ?></a></h2>
                         <p class="price"><?php echo formatPrice($property['price']); ?></p>
+                        <?php if ($property['status'] === 'Sold' && !empty($property['buyer_name'])): ?>
+                            <p class="buyer-note">Bought by <strong><?php echo escapeHtml($property['buyer_name']); ?></strong></p>
+                        <?php endif; ?>
                     </div>
                 </article>
             <?php endwhile; ?>

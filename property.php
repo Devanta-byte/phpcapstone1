@@ -6,7 +6,7 @@ $propertyId = filter_input(INPUT_GET, 'id', FILTER_VALIDATE_INT);
 $property = null;
 
 if ($propertyId) {
-    $statement = $conn->prepare('SELECT properties.*, users.name AS seller_name FROM properties JOIN users ON properties.seller_id = users.id WHERE properties.id = ?');
+    $statement = $conn->prepare('SELECT properties.*, users.name AS seller_name, buyers.name AS buyer_name FROM properties JOIN users ON properties.seller_id = users.id LEFT JOIN users AS buyers ON properties.buyer_id = buyers.id WHERE properties.id = ?');
     $statement->bind_param('i', $propertyId);
     $statement->execute();
     $property = $statement->get_result()->fetch_assoc();
@@ -56,7 +56,13 @@ require 'includes/header.php';
                     <a class="button button-dark" href="login.php">Log in to try a demo purchase</a>
                 <?php endif; ?>
             <?php else: ?>
-                <p class="message message-info">This property has already been marked as sold.</p>
+                <p class="message message-info">
+                    <?php if (!empty($property['buyer_name'])): ?>
+                        This property has been sold to <strong><?php echo escapeHtml($property['buyer_name']); ?></strong>.
+                    <?php else: ?>
+                        This property has already been marked as sold.
+                    <?php endif; ?>
+                </p>
             <?php endif; ?>
         </div>
     </article>

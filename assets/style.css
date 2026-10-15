@@ -113,6 +113,13 @@ button, a, input, select, textarea { -webkit-tap-highlight-color: transparent; }
 .form-hint { margin: 7px 0 22px; color: var(--muted); font-size: 12px; }
 .form-card label { margin: 16px 0 7px; display: block; color: #4b5c53; font-size: 11px; font-weight: 700; }
 .form-card input:not([type=file]), .form-card select, .form-card textarea { width: 100%; min-height: 44px; padding: 11px 12px; color: var(--ink); background: #fff; border: 1px solid #dfe4dc; border-radius: 2px; font-size: 13px; }
+.password-field { position: relative; }
+.password-field input { padding-right: 48px !important; }
+.password-toggle { width: 36px; height: 36px; position: absolute; top: 50%; right: 5px; display: grid; place-items: center; padding: 0; color: var(--muted); background: transparent; border: 0; border-radius: 3px; cursor: pointer; transform: translateY(-50%); }
+.password-toggle:hover { color: var(--green); background: var(--soft-green); }
+.password-toggle svg { width: 19px; height: 19px; fill: none; stroke: currentColor; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; }
+.password-toggle .icon-eye-off, .password-toggle[aria-pressed="true"] .icon-eye { display: none; }
+.password-toggle[aria-pressed="true"] .icon-eye-off { display: block; }
 .form-card input::placeholder, .form-card textarea::placeholder { color: #a6afa9; }
 .form-card textarea { min-height: 130px; resize: vertical; line-height: 1.55; }
 .form-card input[type=file] { width: 100%; padding: 11px; color: var(--muted); background: #f9faf7; border: 1px dashed #c9d2ca; font-size: 11px; }
@@ -156,6 +163,8 @@ button, a, input, select, textarea { -webkit-tap-highlight-color: transparent; }
 .detail-description p { margin: 0; color: #66746b; font-size: 13px; line-height: 1.75; }
 .seller-note { margin: 0 0 20px; color: var(--muted); font-size: 11px; }
 .seller-note strong { color: var(--ink); }
+.buyer-note { margin: 12px 0 0; color: var(--muted); font-size: 11px; }
+.buyer-note strong { color: var(--ink); }
 
 .checkout-layout { max-width: 910px; min-height: 600px; margin: 50px auto 75px; display: grid; grid-template-columns: .9fr 1fr; align-items: center; gap: 52px; }
 .checkout-heading .back-link { margin: 0 0 42px; }
